@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hotkeys</title>
+  <script type="text/javascript" src="./dist/hotkeys.js"></script>
+</head>
+
+<body>
+  <input type="text" class="input" />
+  <div contentEditable="true" style="height: 200px;width: 400px;border: 1px solid red;"></div>
+</body>
+<script>
+  // document.addEventListener('keydown', function (e) {
+  //   e.preventDefault();
+  //   return false;
+  // }, false);
+
+  hotkeys.filter = (event) => {
+    var tagName = (event.target || event.srcElement).tagName;
+    console.log(tagName)
+    // return !(tagName.isContentEditable ||
+    //   tagName == 'INPUT' ||
+    //   tagName == 'SELECT' ||
+    //   tagName == 'TEXTAREA');
+    /**
+     * 2017年7月16日
+     * filter 返回值为true的时候才会被监听
+     **/
+    return true
+  }
+  hotkeys('ctrl+s', function (event, handler) {
+    //event.srcElement: input 
+    //event.target: input
+
+    /**
+     * 2017年7月16日
+     * 阻止浏览器默认快捷键
+     **/
+    event.preventDefault()
+    alert('ctrl + s')
+    console.log(event.target)
+
+  });
+  hotkeys('ctrl+a,ctrl+b,r,f', function (event, handler) {
+    switch (handler.key) {
+      case "ctrl+a":
+        alert('你按下了ctrl+a!');
+        break;
+      case "ctrl+b":
+        alert('你按下了ctrl+b!');
+        break;
+      case "r":
+        alert('你按下了r!');
+        break;
+      case "f":
+        alert('你按下了f!');
+        break;
+    }
+    //handler.scope 范围
+  });
+</script>
+
+</html>
